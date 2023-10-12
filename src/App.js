@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { DisplayDifficulty } from "./components/DisplayDifficulty/DisplayDifficulty";
+import { MenuList } from "./components/MenuList/MenuList";
+import s from "./style.module.css"
 
-function App() {
+export function App() {
+  const [currentDifficulty, setCurrentDifficulty] = useState("");
+
+  function updateDifficulty(difficulty) {
+    setCurrentDifficulty(difficulty);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Select your React difficulty </h1>
+      <div className={s.workspace}>
+        <MenuList
+          onItemClick={updateDifficulty}
+          difficulty={currentDifficulty}
+        />
+        <DisplayDifficulty difficulty={currentDifficulty} />
+      </div>
     </div>
   );
 }
-
-export default App;
